@@ -16,14 +16,14 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-RUN apt-get install -y apache2
+RUN apt-get update && apt-get install -y apache2
 #TODO add apache confiruation
 
 
 EXPOSE 22 80
 
 #INSTALL SUPERVISORD
-RUN apt-get install -y supervisor
+RUN apt-get update && apt-get install -y supervisor
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
